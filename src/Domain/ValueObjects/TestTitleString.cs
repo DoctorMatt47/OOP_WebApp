@@ -1,12 +1,11 @@
 ﻿using System.Text.RegularExpressions;
-using OOP_WebApp.Domain.Attributes;
 using OOP_WebApp.Domain.Exceptions;
 
 namespace OOP_WebApp.Domain.ValueObjects;
 
 public record TestTitleString : ValueObject<string, TestTitleString>
 {
-    private static readonly Regex Regex = new(@"[A-Za-z0-9\.,;:!?()""'%\- ]{2,100}");
+    private static readonly Regex Regex = new(@"[A-Za-z0-9\.,;:!?()""'%\- ]{2,1000}");
 
     protected override void Validate()
     {

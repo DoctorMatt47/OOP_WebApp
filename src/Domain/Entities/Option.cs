@@ -6,15 +6,14 @@ public record OptionId(Guid Value) : Id<Guid>(Value);
 
 public class Option : Entity<OptionId>
 {
-    public Option(OptionString s)
+    public Option(OptionString s, QuestionId questionId)
     {
         String = s;
+        QuestionId = questionId;
         Id = new OptionId(Guid.NewGuid());
     }
 
     public OptionString String { get; }
 
-    // ReSharper disable ReplaceAutoPropertyWithComputedProperty
-    public QuestionId QuestionId { get; } = null!;
-    // ReSharper restore ReplaceAutoPropertyWithComputedProperty
+    public QuestionId QuestionId { get; }
 }

@@ -5,7 +5,7 @@ namespace OOP_WebApp.Domain.ValueObjects;
 
 public record QuestionString : ValueObject<string, QuestionString>
 {
-    private static readonly Regex Regex = new(@"[A-Za-z0-9\.,;:!?()""'%\- ]{2,100}");
+    private static readonly Regex Regex = new(@"[A-Za-z0-9\.,;:!?()""'%\- ]{2,200}");
 
     protected override void Validate()
     {
