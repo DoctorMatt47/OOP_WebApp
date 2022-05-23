@@ -6,7 +6,11 @@ public record OptionId(Guid Value) : Id<Guid>(Value);
 
 public class Option : Entity<OptionId>
 {
-    public Option(OptionString s) => String = s;
+    public Option(OptionString s)
+    {
+        String = s;
+        Id = new OptionId(Guid.NewGuid());
+    }
 
     public OptionString String { get; }
 

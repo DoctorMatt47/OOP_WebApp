@@ -12,6 +12,6 @@ public class User : Entity<UserId>
         PasswordHash = passwordHash;
     }
 
-    public string Username { get; } = null!;
-    public string PasswordHash { get; } = null!;
+    public string Username { get; }
+    public string PasswordHash { get; }
 }

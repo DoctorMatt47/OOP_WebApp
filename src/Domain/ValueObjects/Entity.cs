@@ -4,5 +4,5 @@ namespace OOP_WebApp.Domain.ValueObjects;
 
 public abstract class Entity<T> : IHasId<T>
 {
-    public T Id { get; }
+    public T Id { get; protected init; }
 }

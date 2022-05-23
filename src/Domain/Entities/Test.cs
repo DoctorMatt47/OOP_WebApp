@@ -6,6 +6,13 @@ public record TestId(Guid Value) : Id<Guid>(Value);
 
 public class Test : Entity<TestId>
 {
-    public TestTitleString Title { get; set; }
-    public TestDescriptionString Description { get; set; }
+    public Test(TestTitleString title, TestDescriptionString description)
+    {
+        Title = title;
+        Description = description;
+        Id = new TestId(Guid.NewGuid());
+    }
+
+    public TestTitleString Title { get; }
+    public TestDescriptionString Description { get; }
 }

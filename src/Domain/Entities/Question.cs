@@ -6,11 +6,13 @@ public record QuestionId(Guid Value) : Id<Guid>(Value);
 
 public class Question : Entity<QuestionId>
 {
-    public Question(QuestionString s) => String = s;
+    public Question(QuestionString s)
+    {
+        String = s;
+        Id = new QuestionId(Guid.NewGuid());
+    }
 
     public QuestionString String { get; }
 
-    private List<Option> _options = new();
-
-    public IEnumerable<Option> Options => _options.ToList();
+    public TestId TestId { get; } = null!;
 }
