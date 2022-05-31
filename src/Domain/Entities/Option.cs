@@ -2,15 +2,14 @@
 
 namespace OOP_WebApp.Domain.Entities;
 
-public record OptionId(Guid Value) : Id<Guid>(Value);
+public record OptionId : Id<Guid, OptionId>;
 
 public class Option : Entity<OptionId>
 {
-    public Option(OptionString s, QuestionId questionId)
+    public Option(OptionId id, OptionString s, QuestionId questionId) : base(id)
     {
         String = s;
         QuestionId = questionId;
-        Id = new OptionId(Guid.NewGuid());
     }
 
     public OptionString String { get; }

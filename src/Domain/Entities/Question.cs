@@ -2,15 +2,14 @@
 
 namespace OOP_WebApp.Domain.Entities;
 
-public record QuestionId(Guid Value) : Id<Guid>(Value);
+public record QuestionId : Id<Guid, QuestionId>;
 
 public class Question : Entity<QuestionId>
 {
-    public Question(QuestionString s, TestId testId)
+    public Question(QuestionId id, QuestionString @string, TestId testId) : base(id)
     {
-        String = s;
+        String = @string;
         TestId = testId;
-        Id = new QuestionId(Guid.NewGuid());
     }
 
     public QuestionString String { get; }

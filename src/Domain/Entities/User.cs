@@ -2,11 +2,11 @@
 
 namespace OOP_WebApp.Domain.Entities;
 
-public record UserId(Guid Value) : Id<Guid>(Value);
+public record UserId : Id<Guid, UserId>;
 
 public class User : Entity<UserId>
 {
-    public User(string username, string passwordHash)
+    public User(UserId id, string username, string passwordHash) : base(id)
     {
         Username = username;
         PasswordHash = passwordHash;

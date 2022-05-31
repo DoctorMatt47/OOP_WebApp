@@ -2,16 +2,15 @@
 
 namespace OOP_WebApp.Domain.Entities;
 
-public record TestId(Guid Value) : Id<Guid>(Value);
+public record TestId : Id<Guid, TestId>;
 
 public class Test : Entity<TestId>
 {
-    public Test(TestTitleString title, TestDescriptionString description, UserId userId)
+    public Test(TestId id, TestTitleString title, TestDescriptionString description, UserId userId) : base(id)
     {
         Title = title;
         Description = description;
         UserId = userId;
-        Id = new TestId(Guid.NewGuid());
     }
 
     public TestTitleString Title { get; }
