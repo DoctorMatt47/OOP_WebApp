@@ -1,38 +1,36 @@
-﻿using Application.Common.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using System.Data.Common;
+using Application.Common.Interfaces;
 using Npgsql;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
 
 namespace Infrastructure.Repositories;
 
-public class OptionRepository : IOptionRepository
+public class OptionRepository : RepositoryBase, IOptionRepository
 {
-    private readonly string _connectionString;
-
-    public OptionRepository(IConfiguration configuration) =>
-        _connectionString = configuration
-            .GetSection("ConnectionStrings")
-            .GetSection("OOP_WebApp").Value;
+    public OptionRepository(DbConnection connection) : base(connection)
+    {
+    }
 
     public async Task<IEnumerable<Option>> Get(QuestionId id, CancellationToken cancellationToken)
     {
-        await using var connection = new NpgsqlConnection(_connectionString);
-        await connection.OpenAsync(cancellationToken);
-
         const string sql = @"SELECT * FROM ""Option"" WHERE ""QuestionId"" = @questionId";
-        await using var command = new NpgsqlCommand(sql, connection);
-        command.Parameters.Add(new NpgsqlParameter("@questionId", id.Value));
+        var parameter = new NpgsqlParameter("@questionId", id.Value);
 
+        await using var command = await CreateSqlCommandAsync(sql, parameter, cancellationToken);
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
         var options = new List<Option>();
         while (await reader.ReadAsync(cancellationToken))
         {
-            var optionString = reader.GetString(0);
-            var questionId = reader.GetString(1);
+            var idString = reader.GetString(0);
+            var optionString = reader.GetString(1);
+            var questionId = reader.GetString(2);
 
-            options.Add(new Option(OptionString.From(optionString), new QuestionId(Guid.Parse(questionId))));
+            options.Add(new Option(
+                OptionId.From(Guid.Parse(idString)),
+                OptionString.From(optionString),
+                QuestionId.From(Guid.Parse(questionId))));
         }
 
         return options;
@@ -46,16 +44,10 @@ public class OptionRepository : IOptionRepository
             .SkipLast(2)
             .Aggregate("", (acc, c) => acc + c);
 
-        await using var connection = new NpgsqlConnection(_connectionString);
-        await connection.OpenAsync(cancellationToken);
-
         const string sql = @"INSERT INTO ""Option"" (""Id"", ""String"", ""QuestionId"") VALUES @values";
-        await using var command = new NpgsqlCommand(sql, connection);
-        command.Parameters.Add(new NpgsqlParameter("@values", values));
+        var parameter = new NpgsqlParameter("@values", values);
 
-        var query = command.Parameters.ToArray().Aggregate(command.CommandText,
-            (current, p) => current.Replace(p.ParameterName, p.Value?.ToString()));
-
+        await using var command = await CreateSqlCommandAsync(sql, parameter, cancellationToken);
         await command.ExecuteNonQueryAsync(cancellationToken);
     }
 }
