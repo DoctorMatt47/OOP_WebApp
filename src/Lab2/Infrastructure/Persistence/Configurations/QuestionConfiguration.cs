@@ -12,5 +12,7 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
         builder.Property(q => q.Id).HasConversion(v => v.Value, v => QuestionId.From(v));
         builder.Property(q => q.String).HasConversion(v => v.Value, v => QuestionString.From(v));
         builder.Property(q => q.TestId).HasConversion(v => v.Value, v => TestId.From(v));
+
+        builder.ToTable("Question");
     }
 }

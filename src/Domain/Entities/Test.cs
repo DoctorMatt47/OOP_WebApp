@@ -6,6 +6,10 @@ public record TestId : Id<Guid, TestId>;
 
 public class Test : Entity<TestId>
 {
+    protected Test()
+    {
+    }
+
     public Test(TestId id, TestTitleString title, TestDescriptionString description, Username userId) : base(id)
     {
         Title = title;
@@ -13,8 +17,8 @@ public class Test : Entity<TestId>
         UserId = userId;
     }
 
-    public TestTitleString Title { get; }
-    public TestDescriptionString Description { get; }
+    public TestTitleString Title { get; protected set; } = null!;
+    public TestDescriptionString Description { get; protected set; } = null!;
 
-    public Username UserId { get; }
+    public Username UserId { get; protected set; } = null!;
 }

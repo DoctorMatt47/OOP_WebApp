@@ -6,13 +6,17 @@ public record OptionId : Id<Guid, OptionId>;
 
 public class Option : Entity<OptionId>
 {
-    public Option(OptionId id, OptionString s, QuestionId questionId) : base(id)
+    public Option()
     {
-        String = s;
+    }
+
+    public Option(OptionId id, OptionString @string, QuestionId questionId) : base(id)
+    {
+        String = @string;
         QuestionId = questionId;
     }
 
-    public OptionString String { get; }
+    public OptionString String { get; protected set; } = null!;
 
-    public QuestionId QuestionId { get; }
+    public QuestionId QuestionId { get; protected set; } = null!;
 }

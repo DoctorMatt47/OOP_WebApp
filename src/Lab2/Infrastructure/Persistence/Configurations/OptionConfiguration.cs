@@ -12,5 +12,7 @@ public class OptionConfiguration : IEntityTypeConfiguration<Option>
         builder.Property(o => o.Id).HasConversion(v => v.Value, v => OptionId.From(v));
         builder.Property(o => o.String).HasConversion(v => v.Value, v => OptionString.From(v));
         builder.Property(q => q.QuestionId).HasConversion(v => v.Value, v => QuestionId.From(v));
+
+        builder.ToTable("Option");
     }
 }

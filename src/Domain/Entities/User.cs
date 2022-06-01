@@ -17,6 +17,10 @@ public record Username : Id<string, Username>
 
 public class User : Entity<Username>
 {
+    protected User()
+    {
+    }
+
     public User(Username username, Role role, string passwordHash, string passwordSalt) : base(username)
     {
         Role = role;
@@ -24,7 +28,7 @@ public class User : Entity<Username>
         PasswordSalt = passwordSalt;
     }
 
-    public Role Role { get; }
-    public string PasswordHash { get; }
-    public string PasswordSalt { get; }
+    public Role Role { get; protected set; }
+    public string PasswordHash { get; protected set; } = null!;
+    public string PasswordSalt { get; protected set; } = null!;
 }
