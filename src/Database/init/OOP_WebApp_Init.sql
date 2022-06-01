@@ -2,7 +2,8 @@ CREATE TABLE "User"
 (
     "Username" CHARACTER VARYING(30) PRIMARY KEY,
     "Role" Integer NOT NULL,
-    "PasswordHash" CHARACTER VARYING(30) NOT NULL
+    "PasswordHash" CHARACTER VARYING(64) NOT NULL,
+    "PasswordSalt" CHARACTER VARYING(64) NOT NULL
 );
 
 CREATE TABLE "Test"
