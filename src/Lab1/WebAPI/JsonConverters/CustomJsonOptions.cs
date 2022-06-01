@@ -2,7 +2,7 @@
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace Lab1.WebAPI.JsonConverters;
+namespace OOP_WebApp.Lab1.WebAPI.JsonConverters;
 
 public static class CustomJsonOptions
 {

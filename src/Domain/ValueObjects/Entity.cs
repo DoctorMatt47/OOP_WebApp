@@ -10,5 +10,5 @@ public abstract class Entity<T> : IHasId<T>
 
     protected Entity(T id) => Id = id;
 
-    public T Id { get; }
+    public T Id { get; } = default!;
 }

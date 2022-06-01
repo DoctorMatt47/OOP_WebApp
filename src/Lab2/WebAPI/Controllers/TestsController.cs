@@ -1,10 +1,10 @@
-﻿using Application.Common.Responses;
-using Application.Tests;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OOP_WebApp.Application.Common.Responses;
+using OOP_WebApp.Application.Tests;
 using OOP_WebApp.Domain.Entities;
 
-namespace Lab2.WebAPI.Controllers;
+namespace OOP_WebApp.Lab2.WebAPI.Controllers;
 
 public class TestsController : ApiControllerBase
 {

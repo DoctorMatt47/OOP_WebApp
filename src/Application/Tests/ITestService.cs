@@ -1,7 +1,7 @@
-﻿using Application.Common.Responses;
+﻿using OOP_WebApp.Application.Common.Responses;
 using OOP_WebApp.Domain.Entities;
 
-namespace Application.Tests;
+namespace OOP_WebApp.Application.Tests;
 
 public interface ITestService
 {

@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
-using Application.Common.Interfaces;
+using OOP_WebApp.Application.Common.Interfaces;
 
-namespace Lab1.Infrastructure.UoW;
+namespace OOP_WebApp.Lab1.Infrastructure.UoW;
 
 public class UnitOfWork : IUnitOfWork
 {

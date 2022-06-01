@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json;
-using Application.Users;
-using Lab1.WebAPI.JsonConverters;
+using OOP_WebApp.Application.Users;
+using OOP_WebApp.Lab1.WebAPI.JsonConverters;
 
-namespace Lab1.WebAPI.Middlewares;
+namespace OOP_WebApp.Lab1.WebAPI.Middlewares;
 
 public class UsersMiddleware
 {

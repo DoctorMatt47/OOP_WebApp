@@ -4,12 +4,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>Lab2.Infrastructure</AssemblyName>
-        <RootNamespace>Lab2.Infrastructure</RootNamespace>
+        <AssemblyName>OOP_WebApp.Lab2.Infrastructure</AssemblyName>
+        <RootNamespace>OOP_WebApp.Lab2.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0"/>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4"/>
     </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using Npgsql;
 
-namespace Lab1.Infrastructure.Repositories;
+namespace OOP_WebApp.Lab1.Infrastructure.Repositories;
 
 public abstract class RepositoryBase
 {

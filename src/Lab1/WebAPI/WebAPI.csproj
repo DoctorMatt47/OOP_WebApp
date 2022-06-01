@@ -5,8 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <AssemblyName>Lab1.WebAPI</AssemblyName>
-        <RootNamespace>Lab1.WebAPI</RootNamespace>
+        <AssemblyName>OOP_WebApp.Lab1.WebAPI</AssemblyName>
+        <RootNamespace>OOP_WebApp.Lab1.WebAPI</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

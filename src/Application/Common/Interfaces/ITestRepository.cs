@@ -1,6 +1,6 @@
 ﻿using OOP_WebApp.Domain.Entities;
 
-namespace Application.Common.Interfaces;
+namespace OOP_WebApp.Application.Common.Interfaces;
 
 public interface ITestRepository
 {

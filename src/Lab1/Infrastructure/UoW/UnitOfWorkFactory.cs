@@ -1,9 +1,9 @@
-﻿using Application.Common.Interfaces;
-using Lab1.Infrastructure.Repositories;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Npgsql;
+using OOP_WebApp.Application.Common.Interfaces;
+using OOP_WebApp.Lab1.Infrastructure.Repositories;
 
-namespace Lab1.Infrastructure.UoW;
+namespace OOP_WebApp.Lab1.Infrastructure.UoW;
 
 public class UnitOfWorkFactory : IUnitOfWorkFactory
 {

@@ -1,9 +1,9 @@
-﻿using Application.Common.Interfaces;
-using Lab2.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using OOP_WebApp.Application.Common.Interfaces;
 using OOP_WebApp.Domain.Entities;
+using OOP_WebApp.Lab2.Infrastructure.Persistence;
 
-namespace Lab2.Infrastructure.Repositories;
+namespace OOP_WebApp.Lab2.Infrastructure.Repositories;
 
 public class OptionRepository : RepositoryBase, IOptionRepository
 {

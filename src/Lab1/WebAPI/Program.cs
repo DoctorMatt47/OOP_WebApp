@@ -1,7 +1,7 @@
-using Application.Common.Extensions;
-using Lab1.Infrastructure.Extensions;
-using Lab1.WebAPI.Extensions;
-using Lab1.WebAPI.Middlewares;
+using OOP_WebApp.Application.Common.Extensions;
+using OOP_WebApp.Lab1.Infrastructure.Extensions;
+using OOP_WebApp.Lab1.WebAPI.Extensions;
+using OOP_WebApp.Lab1.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 

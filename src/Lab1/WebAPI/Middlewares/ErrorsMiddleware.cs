@@ -1,6 +1,6 @@
-﻿using Application.Common.Exceptions;
+﻿using OOP_WebApp.Application.Common.Exceptions;
 
-namespace Lab1.WebAPI.Middlewares;
+namespace OOP_WebApp.Lab1.WebAPI.Middlewares;
 
 public class ErrorsMiddleware
 {

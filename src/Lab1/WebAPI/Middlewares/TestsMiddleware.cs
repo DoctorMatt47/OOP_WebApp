@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json;
-using Application.Tests;
-using Lab1.WebAPI.JsonConverters;
+using OOP_WebApp.Application.Tests;
 using OOP_WebApp.Domain.Entities;
+using OOP_WebApp.Lab1.WebAPI.JsonConverters;
 
-namespace Lab1.WebAPI.Middlewares;
+namespace OOP_WebApp.Lab1.WebAPI.Middlewares;
 
 public class TestsMiddleware
 {

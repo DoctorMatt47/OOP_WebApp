@@ -1,7 +1,7 @@
-﻿using Application.Common.Interfaces;
-using Lab2.Infrastructure.Persistence;
+﻿using OOP_WebApp.Application.Common.Interfaces;
+using OOP_WebApp.Lab2.Infrastructure.Persistence;
 
-namespace Lab2.Infrastructure.UoW;
+namespace OOP_WebApp.Lab2.Infrastructure.UoW;
 
 public class UnitOfWork : IUnitOfWork
 {

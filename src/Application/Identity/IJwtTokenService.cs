@@ -1,7 +1,7 @@
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.EntityEnums;
 
-namespace Application.Identity;
+namespace OOP_WebApp.Application.Identity;
 
 public interface IJwtTokenService
 {

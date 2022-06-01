@@ -1,9 +1,9 @@
-﻿using Application.Common.Exceptions;
-using Application.Common.Interfaces;
-using Application.Identity;
+﻿using OOP_WebApp.Application.Common.Exceptions;
+using OOP_WebApp.Application.Common.Interfaces;
+using OOP_WebApp.Application.Identity;
 using OOP_WebApp.Domain.Entities;
 
-namespace Application.Users;
+namespace OOP_WebApp.Application.Users;
 
 public class UserService : IUserService
 {

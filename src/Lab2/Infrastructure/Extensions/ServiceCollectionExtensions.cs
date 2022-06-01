@@ -1,10 +1,10 @@
-﻿using Application.Common.Interfaces;
-using Lab2.Infrastructure.Persistence;
-using Lab2.Infrastructure.UoW;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OOP_WebApp.Application.Common.Interfaces;
+using OOP_WebApp.Lab2.Infrastructure.Persistence;
+using OOP_WebApp.Lab2.Infrastructure.UoW;
 
-namespace Lab2.Infrastructure.Extensions;
+namespace OOP_WebApp.Lab2.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {

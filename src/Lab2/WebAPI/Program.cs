@@ -1,6 +1,6 @@
-using Application.Common.Extensions;
-using Lab2.Infrastructure.Extensions;
-using Lab2.WebAPI.Extensions;
+using OOP_WebApp.Application.Common.Extensions;
+using OOP_WebApp.Lab2.Infrastructure.Extensions;
+using OOP_WebApp.Lab2.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +20,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

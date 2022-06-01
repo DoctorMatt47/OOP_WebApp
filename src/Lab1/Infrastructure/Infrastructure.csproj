@@ -4,8 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>Lab1.Infrastructure</AssemblyName>
-        <RootNamespace>Lab1.Infrastructure</RootNamespace>
+        <AssemblyName>OOP_WebApp.Lab1.Infrastructure</AssemblyName>
+        <RootNamespace>OOP_WebApp.Lab1.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

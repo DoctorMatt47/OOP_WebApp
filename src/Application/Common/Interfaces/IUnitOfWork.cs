@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Interfaces;
+﻿namespace OOP_WebApp.Application.Common.Interfaces;
 
 public interface IUnitOfWork : IAsyncDisposable
 {

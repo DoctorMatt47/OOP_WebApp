@@ -1,4 +1,4 @@
-namespace Application.Users;
+namespace OOP_WebApp.Application.Users;
 
 public interface IUserService
 {

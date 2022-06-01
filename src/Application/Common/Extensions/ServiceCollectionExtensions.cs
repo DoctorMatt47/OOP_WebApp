@@ -1,9 +1,9 @@
-﻿using Application.Identity;
-using Application.Tests;
-using Application.Users;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OOP_WebApp.Application.Identity;
+using OOP_WebApp.Application.Tests;
+using OOP_WebApp.Application.Users;
 
-namespace Application.Common.Extensions;
+namespace OOP_WebApp.Application.Common.Extensions;
 
 public static class ServiceCollectionExtensions
 {

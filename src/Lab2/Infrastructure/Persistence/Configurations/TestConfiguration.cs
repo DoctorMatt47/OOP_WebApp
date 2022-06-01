@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace Lab2.Infrastructure.Persistence.Configurations;
+namespace OOP_WebApp.Lab2.Infrastructure.Persistence.Configurations;
 
 public class TestConfiguration : IEntityTypeConfiguration<Test>
 {

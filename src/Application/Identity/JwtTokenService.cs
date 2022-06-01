@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Application.Common.Options;
 using Microsoft.IdentityModel.Tokens;
+using OOP_WebApp.Application.Common.Options;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.EntityEnums;
 
-namespace Application.Identity;
+namespace OOP_WebApp.Application.Identity;
 
 public class JwtTokenService : IJwtTokenService
 {

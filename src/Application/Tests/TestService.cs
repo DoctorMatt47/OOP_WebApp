@@ -1,9 +1,9 @@
-﻿using Application.Common.Exceptions;
-using Application.Common.Interfaces;
-using Application.Common.Responses;
+﻿using OOP_WebApp.Application.Common.Exceptions;
+using OOP_WebApp.Application.Common.Interfaces;
+using OOP_WebApp.Application.Common.Responses;
 using OOP_WebApp.Domain.Entities;
 
-namespace Application.Tests;
+namespace OOP_WebApp.Application.Tests;
 
 public class TestService : ITestService
 {

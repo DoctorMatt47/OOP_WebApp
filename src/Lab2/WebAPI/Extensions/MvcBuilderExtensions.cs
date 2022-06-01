@@ -1,8 +1,8 @@
-﻿using Lab2.WebAPI.JsonConverters;
-using OOP_WebApp.Domain.Entities;
+﻿using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
+using OOP_WebApp.Lab2.WebAPI.JsonConverters;
 
-namespace Lab2.WebAPI.Extensions;
+namespace OOP_WebApp.Lab2.WebAPI.Extensions;
 
 public static class MvcBuilderExtensions
 {

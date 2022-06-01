@@ -1,7 +1,7 @@
-﻿using Application.Users;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OOP_WebApp.Application.Users;
 
-namespace Lab2.WebAPI.Controllers;
+namespace OOP_WebApp.Lab2.WebAPI.Controllers;
 
 public class UsersController : ApiControllerBase
 {

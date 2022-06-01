@@ -1,10 +1,10 @@
 ﻿using System.Data.Common;
-using Application.Common.Interfaces;
 using Npgsql;
+using OOP_WebApp.Application.Common.Interfaces;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.EntityEnums;
 
-namespace Lab1.Infrastructure.Repositories;
+namespace OOP_WebApp.Lab1.Infrastructure.Repositories;
 
 public class UserRepository : RepositoryBase, IUserRepository
 {
