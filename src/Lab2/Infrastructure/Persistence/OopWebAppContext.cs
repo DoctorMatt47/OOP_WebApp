@@ -1,8 +1,8 @@
-﻿using Infrastructure.Persistence.Configurations;
+﻿using Lab2.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using OOP_WebApp.Domain.Entities;
 
-namespace Infrastructure.Persistence;
+namespace Lab2.Infrastructure.Persistence;
 
 public class OopWebAppContext : DbContext
 {

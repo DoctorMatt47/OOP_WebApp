@@ -4,7 +4,7 @@ using Npgsql;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.EntityEnums;
 
-namespace Infrastructure.Repositories;
+namespace Lab1.Infrastructure.Repositories;
 
 public class UserRepository : RepositoryBase, IUserRepository
 {

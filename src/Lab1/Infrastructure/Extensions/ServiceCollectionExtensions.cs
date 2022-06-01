@@ -1,8 +1,8 @@
 ﻿using Application.Common.Interfaces;
-using Infrastructure.UoW;
+using Lab1.Infrastructure.UoW;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Extensions;
+namespace Lab1.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {

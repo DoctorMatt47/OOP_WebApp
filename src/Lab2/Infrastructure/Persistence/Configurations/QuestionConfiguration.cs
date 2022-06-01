@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace Infrastructure.Persistence.Configurations;
+namespace Lab2.Infrastructure.Persistence.Configurations;
 
 public class QuestionConfiguration : IEntityTypeConfiguration<Question>
 {

@@ -5,7 +5,7 @@ using Npgsql;
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace Infrastructure.Repositories;
+namespace Lab1.Infrastructure.Repositories;
 
 public class TestRepository : RepositoryBase, ITestRepository
 {
