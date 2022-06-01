@@ -1,6 +1,7 @@
 using Application.Common.Extensions;
 using Lab1.Infrastructure.Extensions;
 using Lab1.WebAPI.Extensions;
+using Lab1.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,10 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorsMiddleware>();
+app.UseMiddleware<TestsMiddleware>();
+app.UseMiddleware<UsersMiddleware>();
 
 app.MapControllers();
 

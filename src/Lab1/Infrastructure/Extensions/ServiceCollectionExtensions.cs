@@ -7,5 +7,5 @@ namespace Lab1.Infrastructure.Extensions;
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services) =>
-        services.AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory>();
+        services.AddTransient<IUnitOfWorkFactory, UnitOfWorkFactory>();
 }
