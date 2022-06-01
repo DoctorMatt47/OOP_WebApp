@@ -4,11 +4,13 @@ public abstract record ValueObject<TValue, TThis> where TThis : ValueObject<TVal
 {
     public TValue Value { get; protected init; } = default!;
 
-    protected abstract void Validate();
+    protected virtual void Validate()
+    {
+    }
 
     public static TThis From(TValue value)
     {
-        var tThis = new TThis { Value = value };
+        var tThis = new TThis {Value = value};
 
         tThis.Validate();
 
