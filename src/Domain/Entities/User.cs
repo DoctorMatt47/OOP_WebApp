@@ -7,7 +7,7 @@ namespace OOP_WebApp.Domain.Entities;
 
 public record Username : Id<string, Username>
 {
-    private static readonly Regex Regex = new(@"[A-Za-z0-9\.,;:!?()""'%\- ]{2,25}");
+    private static readonly Regex Regex = new(@"[A-Za-z0-9\.,;:!?()""'%\- ]{2,30}");
 
     protected override void Validate()
     {
@@ -17,12 +17,14 @@ public record Username : Id<string, Username>
 
 public class User : Entity<Username>
 {
-    public User(Username username, string passwordHash, Role role) : base(username)
+    public User(Username username, Role role, string passwordHash, string passwordSalt) : base(username)
     {
-        PasswordHash = passwordHash;
         Role = role;
+        PasswordHash = passwordHash;
+        PasswordSalt = passwordSalt;
     }
 
-    public string PasswordHash { get; }
     public Role Role { get; }
+    public string PasswordHash { get; }
+    public string PasswordSalt { get; }
 }

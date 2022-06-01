@@ -20,7 +20,8 @@ public class UnitOfWorkFactory : IUnitOfWorkFactory
         var options = new OptionRepository(connection);
         var questions = new QuestionRepository(connection);
         var tests = new TestRepository(connection);
+        var users = new UserRepository(connection);
 
-        return new UnitOfWork(connection, options, questions, tests);
+        return new UnitOfWork(connection, options, questions, tests, users);
     }
 }

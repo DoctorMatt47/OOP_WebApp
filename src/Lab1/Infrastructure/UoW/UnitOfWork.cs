@@ -12,12 +12,14 @@ public class UnitOfWork : IUnitOfWork
         DbConnection connection,
         IOptionRepository options,
         IQuestionRepository questions,
-        ITestRepository tests)
+        ITestRepository tests,
+        IUserRepository users)
     {
         _connection = connection;
         Options = options;
         Questions = questions;
         Tests = tests;
+        Users = users;
 
         _connection.Open();
         _transaction = _connection.BeginTransaction();
@@ -26,6 +28,7 @@ public class UnitOfWork : IUnitOfWork
     public IOptionRepository Options { get; }
     public IQuestionRepository Questions { get; }
     public ITestRepository Tests { get; }
+    public IUserRepository Users { get; }
 
     public Task SaveChangesAsync() => _transaction.CommitAsync();
 
