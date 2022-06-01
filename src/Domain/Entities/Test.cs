@@ -6,7 +6,7 @@ public record TestId : Id<Guid, TestId>;
 
 public class Test : Entity<TestId>
 {
-    public Test(TestId id, TestTitleString title, TestDescriptionString description, UserId userId) : base(id)
+    public Test(TestId id, TestTitleString title, TestDescriptionString description, Username userId) : base(id)
     {
         Title = title;
         Description = description;
@@ -16,5 +16,5 @@ public class Test : Entity<TestId>
     public TestTitleString Title { get; }
     public TestDescriptionString Description { get; }
 
-    public UserId UserId { get; }
+    public Username UserId { get; }
 }

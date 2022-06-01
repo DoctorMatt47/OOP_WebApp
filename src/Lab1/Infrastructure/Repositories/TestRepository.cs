@@ -13,7 +13,7 @@ public class TestRepository : RepositoryBase, ITestRepository
     {
     }
 
-    public async Task<IEnumerable<Test>> Get(UserId id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Test>> Get(Username id, CancellationToken cancellationToken)
     {
         const string sql = @"SELECT * FROM ""Test"" WHERE ""UserId"" = @userId";
         var parameter = new NpgsqlParameter("@userId", id.Value);
@@ -70,12 +70,12 @@ public class TestRepository : RepositoryBase, ITestRepository
         var idString = reader.GetGuid(0);
         var titleString = reader.GetString(1);
         var descriptionString = reader.GetString(2);
-        var userId = reader.GetGuid(3);
+        var userId = reader.GetString(3);
 
         return new Test(
             TestId.From(idString),
             TestTitleString.From(titleString),
             TestDescriptionString.From(descriptionString),
-            UserId.From(userId));
+            Username.From(userId));
     }
 }

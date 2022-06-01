@@ -33,7 +33,7 @@ public class TestService : ITestService
     }
 
     public async Task<GuidIdResponse> Create(
-        CreateTestRequest request, UserId userId, CancellationToken cancellationToken)
+        CreateTestRequest request, Username userId, CancellationToken cancellationToken)
     {
         await using var uow = _uowFactory.Create();
 

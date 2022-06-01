@@ -6,5 +6,5 @@ namespace Application.Tests;
 public record CreateTestRequest(
     TestTitleString Title,
     TestDescriptionString Description,
-    UserId UserId,
+    Username UserId,
     IEnumerable<CreateQuestionRequest> Questions);
