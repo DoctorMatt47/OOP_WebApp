@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System.Data;
+using System.Data.Common;
 using Application.Common.Interfaces;
 using Npgsql;
 using OOP_WebApp.Domain.Entities;
@@ -23,14 +24,14 @@ public class OptionRepository : RepositoryBase, IOptionRepository
         var options = new List<Option>();
         while (await reader.ReadAsync(cancellationToken))
         {
-            var idString = reader.GetString(0);
+            var idString = reader.GetGuid(0);
             var optionString = reader.GetString(1);
-            var questionId = reader.GetString(2);
+            var questionId = reader.GetGuid(2);
 
             options.Add(new Option(
-                OptionId.From(Guid.Parse(idString)),
+                OptionId.From(idString),
                 OptionString.From(optionString),
-                QuestionId.From(Guid.Parse(questionId))));
+                QuestionId.From(questionId)));
         }
 
         return options;
@@ -38,16 +39,22 @@ public class OptionRepository : RepositoryBase, IOptionRepository
 
     public async Task Create(IEnumerable<Option> options, CancellationToken cancellationToken)
     {
-        var values = options
-            .Select(o => @$"('{o.Id.Value}', '{o.String.Value}', '{o.QuestionId.Value}')")
-            .Aggregate("", (acc, o) => $"{o}, {acc}")
-            .SkipLast(2)
-            .Aggregate("", (acc, c) => acc + c);
+        const string sql =
+            @"INSERT INTO ""Option"" (""Id"", ""String"", ""QuestionId"") VALUES (@id, @string, @questionId);";
+        var parameters = new NpgsqlParameter[]
+        {
+            new("@id", SqlDbType.NChar),
+            new("@string", SqlDbType.NChar),
+            new("@questionId", SqlDbType.NChar)
+        };
 
-        const string sql = @"INSERT INTO ""Option"" (""Id"", ""String"", ""QuestionId"") VALUES @values";
-        var parameter = new NpgsqlParameter("@values", values);
-
-        await using var command = await CreateSqlCommandAsync(sql, parameter, cancellationToken);
-        await command.ExecuteNonQueryAsync(cancellationToken);
+        await using var command = await CreateSqlCommandAsync(sql, parameters, cancellationToken);
+        foreach (var option in options)
+        {
+            parameters[0].Value = option.Id.Value;
+            parameters[1].Value = option.String.Value;
+            parameters[2].Value = option.QuestionId.Value;
+            await command.ExecuteNonQueryAsync(cancellationToken);
+        }
     }
 }

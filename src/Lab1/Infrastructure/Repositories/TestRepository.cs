@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System.Data;
+using System.Data.Common;
 using Application.Common.Interfaces;
 using Npgsql;
 using OOP_WebApp.Domain.Entities;
@@ -21,19 +22,7 @@ public class TestRepository : RepositoryBase, ITestRepository
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
         var tests = new List<Test>();
-        while (await reader.ReadAsync(cancellationToken))
-        {
-            var idString = reader.GetString(0);
-            var titleString = reader.GetString(1);
-            var descriptionString = reader.GetString(2);
-            var userId = reader.GetString(3);
-
-            tests.Add(new Test(
-                TestId.From(Guid.Parse(idString)),
-                TestTitleString.From(titleString),
-                TestDescriptionString.From(descriptionString),
-                UserId.From(Guid.Parse(userId))));
-        }
+        while (await reader.ReadAsync(cancellationToken)) tests.Add(GetTestFromReader(reader));
 
         return tests;
     }
@@ -48,22 +37,13 @@ public class TestRepository : RepositoryBase, ITestRepository
 
         if (!await reader.ReadAsync(cancellationToken)) return null;
 
-        var idString = reader.GetString(0);
-        var titleString = reader.GetString(1);
-        var descriptionString = reader.GetString(2);
-        var userId = reader.GetString(3);
-
-        return new Test(
-            TestId.From(Guid.Parse(idString)),
-            TestTitleString.From(titleString),
-            TestDescriptionString.From(descriptionString),
-            UserId.From(Guid.Parse(userId)));
+        return GetTestFromReader(reader);
     }
 
     public async Task Create(Test test, CancellationToken cancellationToken)
     {
-        const string sql = @"INSERT INTO ""Test"" (""Id"", ""Title"", ""Description"", ""UserId"") VALUES
-                                                                          (@id, @title, @description, @userId)";
+        const string sql =
+            @"INSERT INTO ""Test"" (""Id"", ""Title"", ""Description"", ""UserId"") VALUES (@id, @title, @description, @userId)";
         var parameters = new NpgsqlParameter[]
         {
             new("@id", test.Id.Value),
@@ -83,5 +63,19 @@ public class TestRepository : RepositoryBase, ITestRepository
 
         await using var command = await CreateSqlCommandAsync(sql, parameter, cancellationToken);
         await command.ExecuteNonQueryAsync(cancellationToken);
+    }
+
+    private static Test GetTestFromReader(IDataRecord reader)
+    {
+        var idString = reader.GetGuid(0);
+        var titleString = reader.GetString(1);
+        var descriptionString = reader.GetString(2);
+        var userId = reader.GetGuid(3);
+
+        return new Test(
+            TestId.From(idString),
+            TestTitleString.From(titleString),
+            TestDescriptionString.From(descriptionString),
+            UserId.From(userId));
     }
 }

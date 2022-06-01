@@ -5,5 +5,5 @@ namespace Application.Common.Interfaces;
 public interface IQuestionRepository
 {
     Task<IEnumerable<Question>> Get(TestId id, CancellationToken cancellationToken);
-    Task Create(IEnumerable<Question> question, CancellationToken cancellationToken);
+    Task Create(IEnumerable<Question> questions, CancellationToken cancellationToken);
 }
