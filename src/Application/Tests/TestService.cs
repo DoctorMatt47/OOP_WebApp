@@ -1,4 +1,6 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using Application.Common.Responses;
 using OOP_WebApp.Domain.Entities;
 
 namespace Application.Tests;
@@ -14,6 +16,7 @@ public class TestService : ITestService
         await using var uow = _uowFactory.Create();
 
         var test = await uow.Tests.Get(id, cancellationToken);
+        if (test is null) throw new NotFoundException($"There is no test with id = {id.Value}");
 
         var questions = await uow.Questions.Get(test.Id, cancellationToken);
 
@@ -29,30 +32,33 @@ public class TestService : ITestService
         return new GetTestResponse(test.Id, test.Title, test.Description, test.UserId, questionResponses);
     }
 
-    public async Task<TestId> Create(CreateTestRequest request, UserId userId, CancellationToken cancellationToken)
+    public async Task<GuidIdResponse> Create(
+        CreateTestRequest request, UserId userId, CancellationToken cancellationToken)
     {
         await using var uow = _uowFactory.Create();
 
         var testId = TestId.From(Guid.NewGuid());
-        await uow.Tests.Create(new Test(testId, request.Title, request.Description, userId), cancellationToken);
 
         var questions = new List<Question>();
+        var optionLists = new List<IEnumerable<Option>>();
         foreach (var questionRequest in request.Questions)
         {
             var questionId = QuestionId.From(Guid.NewGuid());
+
+            optionLists.Add(questionRequest.Options
+                .Select(o => new Option(OptionId.From(Guid.NewGuid()), o.String, questionId)));
+
             questions.Add(new Question(questionId, questionRequest.String, testId));
-
-            var options = questionRequest.Options
-                .Select(o => new Option(OptionId.From(Guid.NewGuid()), o.String, questionId));
-
-            await uow.Options.Create(options, cancellationToken);
         }
 
+        var test = new Test(testId, request.Title, request.Description, userId);
+        await uow.Tests.Create(test, cancellationToken);
         await uow.Questions.Create(questions, cancellationToken);
+        foreach (var options in optionLists) await uow.Options.Create(options, cancellationToken);
 
         await uow.SaveChangesAsync();
 
-        return testId;
+        return new GuidIdResponse(testId.Value);
     }
 
     public async Task Delete(TestId id, CancellationToken cancellationToken)
