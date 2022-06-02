@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+
+  database:
+    image: postgres
+    restart: always
+    hostname: postgres
+    environment:
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
+    ports:
+        - "5432:5432"
+    volumes:
+        - ./src/Database/init:/docker-entrypoint-initdb.d
+
+  webapi-lab1:
+    build:
+      context: .
+      dockerfile: src/Lab1/WebAPI/Dockerfile
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - "5222:80"
+      - "7222:443"
+    restart: on-failure
