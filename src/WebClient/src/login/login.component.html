@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <div class="main-bar login-menu">
+        <span class="display-4">Login</span>
+        <form action="">
+          <div class="form-group">
+            <label for="email">Username</label>
+            <input type="email" class="form-control" id="email" name="username"
+                   aria-describedby="emailHelpId" [(ngModel)]="username">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="username"
+                   [(ngModel)]="password">
+            <div *ngIf="errorMessage.length != 0" class="text-danger">
+              {{errorMessage}}
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+            <div class="mt-3">
+              <a routerLink="/signup">Don't have an account? Sign up</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>
