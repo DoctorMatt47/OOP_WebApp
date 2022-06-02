@@ -45,20 +45,31 @@ public class TestsMiddleware
             return;
         }
 
-        var id = context.Request.Query["id"].ToString();
-        if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out var guid))
+        if (context.Request.Path.Value?.Length > 10)
         {
-            context.Response.StatusCode = 400;
-            return;
+            var id = context.Request.Path.Value?[11..];
+            if (!Guid.TryParse(id, out var guid))
+            {
+                context.Response.StatusCode = 400;
+                return;
+            }
+
+            var test = await _tests.Get(TestId.From(guid), context.RequestAborted);
+            var testJson = JsonSerializer.Serialize(test, CustomJsonOptions.Get());
+            var testBytes = Encoding.UTF8.GetBytes(testJson);
+
+            context.Response.StatusCode = 200;
+            context.Response.ContentType = "application/json; charset=utf-8";
+            await context.Response.Body.WriteAsync(testBytes, 0, testBytes.Length);
         }
 
-        var test = await _tests.Get(TestId.From(guid), context.RequestAborted);
-        var testJson = JsonSerializer.Serialize(test, CustomJsonOptions.Get());
-        var testBytes = Encoding.UTF8.GetBytes(testJson);
+        var tests = await _tests.Get(context.RequestAborted);
+        var testsJson = JsonSerializer.Serialize(tests, CustomJsonOptions.Get());
+        var testsBytes = Encoding.UTF8.GetBytes(testsJson);
 
         context.Response.StatusCode = 200;
         context.Response.ContentType = "application/json; charset=utf-8";
-        await context.Response.Body.WriteAsync(testBytes, 0, testBytes.Length);
+        await context.Response.Body.WriteAsync(testsBytes, 0, testsBytes.Length);
     }
 
     private async Task CreateTest(HttpContext context)
