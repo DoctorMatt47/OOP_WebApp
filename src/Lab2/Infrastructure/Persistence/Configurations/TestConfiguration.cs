@@ -12,7 +12,7 @@ public class TestConfiguration : IEntityTypeConfiguration<Test>
         builder.Property(t => t.Id).HasConversion(t => t.Value, t => TestId.From(t));
         builder.Property(t => t.Title).HasConversion(t => t.Value, t => TestTitleString.From(t));
         builder.Property(t => t.Description).HasConversion(t => t.Value, t => TestDescriptionString.From(t));
-        builder.Property(t => t.UserId).HasConversion(t => t.Value, t => Username.From(t));
+        builder.Property(t => t.Username).HasConversion(t => t.Value, t => Username.From(t));
 
         builder.ToTable("Test");
     }

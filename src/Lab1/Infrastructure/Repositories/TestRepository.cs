@@ -13,12 +13,11 @@ public class TestRepository : RepositoryBase, ITestRepository
     {
     }
 
-    public async Task<IEnumerable<Test>> Get(Username id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Test>> Get(CancellationToken cancellationToken)
     {
-        const string sql = @"SELECT * FROM ""Test"" WHERE ""UserId"" = @userId";
-        var parameter = new NpgsqlParameter("@userId", id.Value);
+        const string sql = @"SELECT * FROM ""Test""";
 
-        await using var command = await CreateSqlCommandAsync(sql, parameter, cancellationToken);
+        await using var command = await CreateSqlCommandAsync(sql, new NpgsqlParameter[] { }, cancellationToken);
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
         var tests = new List<Test>();
@@ -49,7 +48,7 @@ public class TestRepository : RepositoryBase, ITestRepository
             new("@id", test.Id.Value),
             new("@title", test.Title.Value),
             new("@description", test.Description.Value),
-            new("@userId", test.UserId.Value)
+            new("@userId", test.Username.Value)
         };
 
         await using var command = await CreateSqlCommandAsync(sql, parameters, cancellationToken);

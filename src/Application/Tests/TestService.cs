@@ -11,6 +11,15 @@ public class TestService : ITestService
 
     public TestService(IUnitOfWorkFactory uowFactory) => _uowFactory = uowFactory;
 
+    public async Task<IEnumerable<GetTestResponse>> Get(CancellationToken cancellationToken)
+    {
+        await using var uow = _uowFactory.Create();
+
+        var tests = await uow.Tests.Get(cancellationToken);
+        return tests.Select(t =>
+            new GetTestResponse(t.Id, t.Title, t.Description, t.Username, new GetQuestionResponse[] { }));
+    }
+
     public async Task<GetTestResponse> Get(TestId id, CancellationToken cancellationToken)
     {
         await using var uow = _uowFactory.Create();
@@ -29,7 +38,7 @@ public class TestService : ITestService
             questionResponses.Add(new GetQuestionResponse(question.Id, question.String, optionResponses));
         }
 
-        return new GetTestResponse(test.Id, test.Title, test.Description, test.UserId, questionResponses);
+        return new GetTestResponse(test.Id, test.Title, test.Description, test.Username, questionResponses);
     }
 
     public async Task<GuidIdResponse> Create(
@@ -52,10 +61,14 @@ public class TestService : ITestService
         }
 
         var test = new Test(testId, request.Title, request.Description, userId);
-        await uow.Tests.Create(test, cancellationToken);
-        await uow.Questions.Create(questions, cancellationToken);
-        foreach (var options in optionLists) await uow.Options.Create(options, cancellationToken);
 
+        await uow.Tests.Create(test, cancellationToken);
+        await uow.SaveChangesAsync();
+
+        await uow.Questions.Create(questions, cancellationToken);
+        await uow.SaveChangesAsync();
+
+        foreach (var options in optionLists) await uow.Options.Create(options, cancellationToken);
         await uow.SaveChangesAsync();
 
         return new GuidIdResponse(testId.Value);

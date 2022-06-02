@@ -10,15 +10,15 @@ public class Test : Entity<TestId>
     {
     }
 
-    public Test(TestId id, TestTitleString title, TestDescriptionString description, Username userId) : base(id)
+    public Test(TestId id, TestTitleString title, TestDescriptionString description, Username username) : base(id)
     {
         Title = title;
         Description = description;
-        UserId = userId;
+        Username = username;
     }
 
     public TestTitleString Title { get; protected set; } = null!;
     public TestDescriptionString Description { get; protected set; } = null!;
 
-    public Username UserId { get; protected set; } = null!;
+    public Username Username { get; protected set; } = null!;
 }

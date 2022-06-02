@@ -11,10 +11,8 @@ public class TestRepository : RepositoryBase, ITestRepository
     {
     }
 
-    public async Task<IEnumerable<Test>> Get(Username id, CancellationToken cancellationToken) =>
-        await Context.Tests
-            .Where(t => t.UserId == id)
-            .ToListAsync(cancellationToken);
+    public async Task<IEnumerable<Test>> Get(CancellationToken cancellationToken) =>
+        await Context.Tests.ToListAsync(cancellationToken);
 
     public async Task<Test?> Get(TestId id, CancellationToken cancellationToken) => await Context.Tests.FindAsync(id);
 
