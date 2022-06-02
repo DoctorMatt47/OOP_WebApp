@@ -12,14 +12,15 @@ export class TestService {
               private _token: TokenService) {
   }
 
-  get(id: string): Observable<any> {
+  get(id?: string): Observable<any> {
     const jwtToken = this._token.jwtToken;
     const options = {
       headers: new HttpHeaders({
         Authorization: `bearer ${jwtToken}`
       }),
     };
-    const getString = this._url + '?id=' + id;
+
+    const getString = id != undefined ? (this._url + '/' + id) : this._url;
     return this._http.get(getString, options);
   }
 

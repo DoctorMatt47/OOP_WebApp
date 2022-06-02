@@ -14,10 +14,13 @@ public class TestsController : ApiControllerBase
 
     [HttpGet]
     [Authorize]
-    public async Task<ActionResult<object>> Get(Guid? id, CancellationToken cancellationToken) =>
-        id is null
-            ? Ok(await _tests.Get(cancellationToken))
-            : Ok(await _tests.Get(TestId.From(id.Value), cancellationToken));
+    public async Task<IEnumerable<GetTestResponse>> Get(CancellationToken cancellationToken) =>
+        await _tests.Get(cancellationToken);
+
+    [HttpGet("{id:guid}")]
+    [Authorize]
+    public async Task<GetTestResponse> Get(Guid id, CancellationToken cancellationToken) =>
+        await _tests.Get(TestId.From(id), cancellationToken);
 
     [HttpPost]
     [Authorize(Roles = "Tutor")]

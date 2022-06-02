@@ -3,5 +3,5 @@
 export class Question {
   id?: string;
   string?: string;
-  options?: Array<Option>
+  options: Array<Option> = new Array<Option>();
 }

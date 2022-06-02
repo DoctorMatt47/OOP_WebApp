@@ -8,17 +8,21 @@ import {LoginComponent} from "../login/login.component";
 import {TestComponent} from "../test/test.component";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {TestsComponent} from "../tests/tests.component";
+import {CreatorComponent} from "../creator/creator.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: "tests", pathMatch: "full"},
   {path: 'test/:id', component: TestComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'tests', component: TestsComponent},
+  {path: 'creator', component: CreatorComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, NotFoundComponent, LoginComponent, TestComponent
+    AppComponent, NotFoundComponent, LoginComponent, TestComponent, TestsComponent, CreatorComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule
