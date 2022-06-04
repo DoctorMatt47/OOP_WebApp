@@ -51,4 +51,11 @@ public class UserService : IUserService
         var token = _jwtToken.Get(user.Id, user.Role);
         return new AuthenticateResponse(token);
     }
+
+    public async Task<IEnumerable<GetUserResponse>> Get(TestId testId, CancellationToken cancellationToken)
+    {
+        await using var uow = _factory.Create();
+        var users = await uow.Users.Get(testId, cancellationToken);
+        return users.Select(u => new GetUserResponse(u.Id, u.Role));
+    }
 }

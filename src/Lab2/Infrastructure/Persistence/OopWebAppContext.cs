@@ -14,6 +14,7 @@ public class OopWebAppContext : DbContext
     public DbSet<Question> Questions { get; set; } = null!;
     public DbSet<Test> Tests { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Answer> Answers { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,6 +22,7 @@ public class OopWebAppContext : DbContext
         modelBuilder.ApplyConfiguration(new QuestionConfiguration());
         modelBuilder.ApplyConfiguration(new TestConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new AnswerConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }

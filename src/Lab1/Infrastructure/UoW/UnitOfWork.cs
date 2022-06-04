@@ -6,20 +6,22 @@ namespace OOP_WebApp.Lab1.Infrastructure.UoW;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DbConnection _connection;
-    private readonly DbTransaction _transaction;
+    private DbTransaction _transaction;
 
     public UnitOfWork(
         DbConnection connection,
         IOptionRepository options,
         IQuestionRepository questions,
         ITestRepository tests,
-        IUserRepository users)
+        IUserRepository users,
+        IAnswerRepository answers)
     {
         _connection = connection;
         Options = options;
         Questions = questions;
         Tests = tests;
         Users = users;
+        Answers = answers;
 
         _connection.Open();
         _transaction = _connection.BeginTransaction();
@@ -29,8 +31,13 @@ public class UnitOfWork : IUnitOfWork
     public IQuestionRepository Questions { get; }
     public ITestRepository Tests { get; }
     public IUserRepository Users { get; }
+    public IAnswerRepository Answers { get; }
 
-    public Task SaveChangesAsync() => _transaction.CommitAsync();
+    public async Task SaveChangesAsync()
+    {
+        await _transaction.CommitAsync();
+        _transaction = await _connection.BeginTransactionAsync();
+    }
 
     public async ValueTask DisposeAsync()
     {

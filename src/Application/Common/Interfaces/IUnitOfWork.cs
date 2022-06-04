@@ -6,6 +6,7 @@ public interface IUnitOfWork : IAsyncDisposable
     IQuestionRepository Questions { get; }
     ITestRepository Tests { get; }
     IUserRepository Users { get; }
+    IAnswerRepository Answers { get; }
 
     Task SaveChangesAsync();
 }

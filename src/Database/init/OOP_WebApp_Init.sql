@@ -16,14 +16,23 @@ CREATE TABLE "Test"
 
 CREATE TABLE "Question"
 (
-    "Id" UUID PRIMARY KEY,
+    "Id"     UUID PRIMARY KEY,
     "String" CHARACTER VARYING(200) NOT NULL,
-    "TestId" UUID REFERENCES "Test"("Id") ON DELETE CASCADE
+    "TestId" UUID REFERENCES "Test" ("Id") ON DELETE CASCADE
 );
 
 CREATE TABLE "Option"
 (
-    "Id" UUID PRIMARY KEY,
-    "String" CHARACTER VARYING(100) NOT NULL,
-    "QuestionId" UUID REFERENCES "Question"("Id") ON DELETE CASCADE
+    "Id"         UUID PRIMARY KEY,
+    "String"     CHARACTER VARYING(100) NOT NULL,
+    "QuestionId" UUID REFERENCES "Question" ("Id") ON DELETE CASCADE
+);
+
+CREATE TABLE "Answer"
+(
+    "Id"         UUID PRIMARY KEY,
+    "Username"   CHARACTER VARYING(30) REFERENCES "User" ("Username") ON DELETE CASCADE,
+    "TestId"     UUID REFERENCES "Test" ("Id") ON DELETE CASCADE,
+    "QuestionId" UUID REFERENCES "Question" ("Id") ON DELETE CASCADE,
+    "OptionId"   UUID REFERENCES "Option" ("Id") ON DELETE CASCADE
 );

@@ -16,7 +16,8 @@ public class UnitOfWorkFactory : IUnitOfWorkFactory
         var questions = new QuestionRepository(_context);
         var tests = new TestRepository(_context);
         var users = new UserRepository(_context);
+        var answers = new AnswerRepository(_context);
 
-        return new UnitOfWork(_context, options, questions, tests, users);
+        return new UnitOfWork(_context, options, questions, tests, users, answers);
     }
 }

@@ -12,13 +12,15 @@ public class UnitOfWork : IUnitOfWork
         IOptionRepository options,
         IQuestionRepository questions,
         ITestRepository tests,
-        IUserRepository users)
+        IUserRepository users,
+        IAnswerRepository answers)
     {
         _context = context;
         Options = options;
         Questions = questions;
         Tests = tests;
         Users = users;
+        Answers = answers;
     }
 
     public ValueTask DisposeAsync() => ValueTask.CompletedTask;
@@ -27,6 +29,7 @@ public class UnitOfWork : IUnitOfWork
     public IQuestionRepository Questions { get; }
     public ITestRepository Tests { get; }
     public IUserRepository Users { get; }
+    public IAnswerRepository Answers { get; }
 
     public Task SaveChangesAsync() => _context.SaveChangesAsync();
 }

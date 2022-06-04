@@ -21,7 +21,8 @@ public class UnitOfWorkFactory : IUnitOfWorkFactory
         var questions = new QuestionRepository(connection);
         var tests = new TestRepository(connection);
         var users = new UserRepository(connection);
+        var answers = new AnswerRepository(connection);
 
-        return new UnitOfWork(connection, options, questions, tests, users);
+        return new UnitOfWork(connection, options, questions, tests, users, answers);
     }
 }
