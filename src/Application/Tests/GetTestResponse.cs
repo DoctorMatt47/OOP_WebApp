@@ -7,5 +7,5 @@ public record GetTestResponse(
     TestId Id,
     TestTitleString Title,
     TestDescriptionString Description,
-    Username UserId,
+    Username Username,
     IEnumerable<GetQuestionResponse> Questions);

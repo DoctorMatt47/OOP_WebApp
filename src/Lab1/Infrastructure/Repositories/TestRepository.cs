@@ -42,13 +42,13 @@ public class TestRepository : RepositoryBase, ITestRepository
     public async Task Create(Test test, CancellationToken cancellationToken)
     {
         const string sql =
-            @"INSERT INTO ""Test"" (""Id"", ""Title"", ""Description"", ""UserId"") VALUES (@id, @title, @description, @userId)";
+            @"INSERT INTO ""Test"" (""Id"", ""Title"", ""Description"", ""Username"") VALUES (@id, @title, @description, @username)";
         var parameters = new NpgsqlParameter[]
         {
             new("@id", test.Id.Value),
             new("@title", test.Title.Value),
             new("@description", test.Description.Value),
-            new("@userId", test.Username.Value)
+            new("@username", test.Username.Value)
         };
 
         await using var command = await CreateSqlCommandAsync(sql, parameters, cancellationToken);

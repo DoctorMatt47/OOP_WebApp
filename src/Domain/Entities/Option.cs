@@ -6,7 +6,7 @@ public record OptionId : Id<Guid, OptionId>;
 
 public class Option : Entity<OptionId>
 {
-    public Option()
+    protected Option()
     {
     }
 

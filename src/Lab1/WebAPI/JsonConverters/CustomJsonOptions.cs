@@ -19,6 +19,8 @@ public static class CustomJsonOptions
         converters.Add(new IdJsonConverter<Guid, TestId>());
         converters.Add(new IdJsonConverter<string, Username>());
         options.PropertyNameCaseInsensitive = true;
+        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.WriteIndented = true;
         return options;
     }
 }

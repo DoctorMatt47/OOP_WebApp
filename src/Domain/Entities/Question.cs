@@ -6,7 +6,7 @@ public record QuestionId : Id<Guid, QuestionId>;
 
 public class Question : Entity<QuestionId>
 {
-    public Question()
+    protected Question()
     {
     }
 
