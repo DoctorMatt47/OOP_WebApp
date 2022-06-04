@@ -3,6 +3,7 @@ version: "3.9"
 services:
 
   database:
+    container_name: database
     image: postgres
     restart: always
     hostname: postgres
@@ -16,6 +17,7 @@ services:
         - ./src/Database/init:/docker-entrypoint-initdb.d
 
   webapi-lab2:
+    container_name: webapi-lab2 
     build:
       context: .
       dockerfile: src/Lab2/WebAPI/Dockerfile

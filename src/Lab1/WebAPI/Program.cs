@@ -16,6 +16,10 @@ builder.Services
     .AddInfrastructure()
     .AddBearerAuthentication();
 
+const string origins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+    options.AddPolicy(origins, policy => policy.WithOrigins("http://localhost:4200")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +30,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(origins);
 
 app.UseAuthentication();
 app.UseAuthorization();
