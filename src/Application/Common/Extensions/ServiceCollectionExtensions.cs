@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OOP_WebApp.Application.Answers;
 using OOP_WebApp.Application.Identity;
 using OOP_WebApp.Application.Tests;
 using OOP_WebApp.Application.Users;
@@ -12,5 +13,6 @@ public static class ServiceCollectionExtensions
             .AddTransient<IJwtTokenService, JwtTokenService>()
             .AddTransient<IHashService, HashService>()
             .AddTransient<ITestService, TestService>()
-            .AddTransient<IUserService, UserService>();
+            .AddTransient<IUserService, UserService>()
+            .AddTransient<IAnswerService, AnswerService>();
 }

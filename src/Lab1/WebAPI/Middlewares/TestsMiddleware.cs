@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
+using OOP_WebApp.Application.Common.JsonConverters;
 using OOP_WebApp.Application.Tests;
 using OOP_WebApp.Domain.Entities;
-using OOP_WebApp.Lab1.WebAPI.JsonConverters;
 
 namespace OOP_WebApp.Lab1.WebAPI.Middlewares;
 
@@ -55,7 +55,7 @@ public class TestsMiddleware
             }
 
             var test = await _tests.Get(TestId.From(guid), context.RequestAborted);
-            var testJson = JsonSerializer.Serialize(test, CustomJsonOptions.Get());
+            var testJson = JsonSerializer.Serialize(test, CustomJsonOptions.Update(new JsonSerializerOptions()));
             var testBytes = Encoding.UTF8.GetBytes(testJson);
 
             context.Response.StatusCode = 200;
@@ -64,7 +64,7 @@ public class TestsMiddleware
         }
 
         var tests = await _tests.Get(context.RequestAborted);
-        var testsJson = JsonSerializer.Serialize(tests, CustomJsonOptions.Get());
+        var testsJson = JsonSerializer.Serialize(tests, CustomJsonOptions.Update(new JsonSerializerOptions()));
         var testsBytes = Encoding.UTF8.GetBytes(testsJson);
 
         context.Response.StatusCode = 200;
@@ -83,7 +83,8 @@ public class TestsMiddleware
 
         var requestBody = await context.Request.BodyReader.ReadAsync();
         var testJson = Encoding.UTF8.GetString(requestBody.Buffer);
-        var test = JsonSerializer.Deserialize<CreateTestRequest>(testJson, CustomJsonOptions.Get());
+        var test = JsonSerializer.Deserialize<CreateTestRequest>(testJson,
+            CustomJsonOptions.Update(new JsonSerializerOptions()));
 
         if (test is null)
         {
@@ -92,7 +93,7 @@ public class TestsMiddleware
         }
 
         var testId = await _tests.Create(test, Username.From(username), context.RequestAborted);
-        var testIdJson = JsonSerializer.Serialize(testId, CustomJsonOptions.Get());
+        var testIdJson = JsonSerializer.Serialize(testId, CustomJsonOptions.Update(new JsonSerializerOptions()));
         var testIdBytes = Encoding.UTF8.GetBytes(testIdJson);
 
         context.Response.StatusCode = 200;
