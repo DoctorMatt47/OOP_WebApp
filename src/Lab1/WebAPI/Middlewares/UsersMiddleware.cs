@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
+using OOP_WebApp.Application.Common.JsonConverters;
 using OOP_WebApp.Application.Users;
-using OOP_WebApp.Lab1.WebAPI.JsonConverters;
 
 namespace OOP_WebApp.Lab1.WebAPI.Middlewares;
 
@@ -39,7 +39,9 @@ public class UsersMiddleware
     {
         var requestBody = await context.Request.BodyReader.ReadAsync();
         var testJson = Encoding.UTF8.GetString(requestBody.Buffer);
-        var userRequest = JsonSerializer.Deserialize<CreateUserRequest>(testJson, CustomJsonOptions.Get());
+        var userRequest =
+            JsonSerializer.Deserialize<CreateUserRequest>(testJson,
+                CustomJsonOptions.Update(new JsonSerializerOptions()));
 
         if (userRequest is null)
         {
@@ -48,7 +50,7 @@ public class UsersMiddleware
         }
 
         var authResponse = await _users.Create(userRequest, context.RequestAborted);
-        var authJson = JsonSerializer.Serialize(authResponse, CustomJsonOptions.Get());
+        var authJson = JsonSerializer.Serialize(authResponse, CustomJsonOptions.Update(new JsonSerializerOptions()));
         var authBytes = Encoding.UTF8.GetBytes(authJson);
 
         context.Response.StatusCode = 200;
@@ -60,7 +62,9 @@ public class UsersMiddleware
     {
         var requestBody = await context.Request.BodyReader.ReadAsync();
         var userJson = Encoding.UTF8.GetString(requestBody.Buffer);
-        var userRequest = JsonSerializer.Deserialize<AuthenticateRequest>(userJson, CustomJsonOptions.Get());
+        var userRequest =
+            JsonSerializer.Deserialize<AuthenticateRequest>(userJson,
+                CustomJsonOptions.Update(new JsonSerializerOptions()));
 
         if (userRequest is null)
         {
@@ -69,7 +73,7 @@ public class UsersMiddleware
         }
 
         var authResponse = await _users.Authenticate(userRequest, context.RequestAborted);
-        var authJson = JsonSerializer.Serialize(authResponse, CustomJsonOptions.Get());
+        var authJson = JsonSerializer.Serialize(authResponse, CustomJsonOptions.Update(new JsonSerializerOptions()));
         var authBytes = Encoding.UTF8.GetBytes(authJson);
 
         context.Response.StatusCode = 200;

@@ -18,6 +18,13 @@ public class UserService : IUserService
         _hash = hash;
     }
 
+    public async Task<IEnumerable<GetUserResponse>> Get(TestId testId, CancellationToken cancellationToken)
+    {
+        await using var uow = _factory.Create();
+        var users = await uow.Users.Get(testId, cancellationToken);
+        return users.Select(u => new GetUserResponse(u.Id, u.Role));
+    }
+
     public async Task<AuthenticateResponse> Authenticate(
         AuthenticateRequest request,
         CancellationToken cancellationToken)
@@ -31,7 +38,7 @@ public class UserService : IUserService
         if (user.PasswordHash != passwordHash) throw new BadRequestException("Incorrect username or password");
 
         var token = _jwtToken.Get(user.Id, user.Role);
-        return new AuthenticateResponse(token);
+        return new AuthenticateResponse(token, user.Id, user.Role);
     }
 
     public async Task<AuthenticateResponse> Create(CreateUserRequest request, CancellationToken cancellationToken)
@@ -49,13 +56,6 @@ public class UserService : IUserService
         await uow.SaveChangesAsync();
 
         var token = _jwtToken.Get(user.Id, user.Role);
-        return new AuthenticateResponse(token);
-    }
-
-    public async Task<IEnumerable<GetUserResponse>> Get(TestId testId, CancellationToken cancellationToken)
-    {
-        await using var uow = _factory.Create();
-        var users = await uow.Users.Get(testId, cancellationToken);
-        return users.Select(u => new GetUserResponse(u.Id, u.Role));
+        return new AuthenticateResponse(token, user.Id, user.Role);
     }
 }
