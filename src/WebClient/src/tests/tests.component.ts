@@ -5,12 +5,13 @@ import {Observer} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {TokenService} from "../services/tokens/token.service";
 import {Router} from "@angular/router";
+import {Role} from "../models/users/role.enum";
 
 @Component({
   selector: 'tests',
   templateUrl: './tests.component.html',
   styleUrls: [],
-  providers: [TokenService, TestService, HttpClient]
+  providers: [TestService, HttpClient]
 })
 export class TestsComponent {
   tests: Array<Test> = new Array<Test>();
@@ -21,6 +22,10 @@ export class TestsComponent {
   }
 
   ngOnInit(): void {
+    if (this._token.role == Role.tutor) {
+      this._router.navigate(['profile']);
+      return;
+    }
     if (!this._token.isJwtTokenExists()) {
       this._router.navigate(['login']);
       return;

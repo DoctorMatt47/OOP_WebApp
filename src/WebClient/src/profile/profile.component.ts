@@ -5,6 +5,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Test} from "../models/tests/test.model";
 import {Router} from "@angular/router";
 import {Observer} from "rxjs";
+import {Role} from "../models/users/role.enum";
 
 @Component({
   selector: 'profile',
@@ -20,16 +21,18 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
+    if (this._token.role == Role.student) {
+      this._router.navigate(['tests']);
+      return;
+    }
     if (!this._token.isJwtTokenExists()) {
       this._router.navigate(['login']);
       return;
     }
     let observer: Observer<any> = {
-      error: (response: HttpErrorResponse) => {
-        console.log(response);
-      },
+      error: (response: HttpErrorResponse) => console.log(response),
       next: (next: Array<Test>) => {
-        this.tests = next.filter(t => t.username);
+        this.tests = next.filter(t => t.username == this._token.username);
         console.log(this.tests);
       },
       complete: () => {

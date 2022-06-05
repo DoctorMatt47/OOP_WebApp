@@ -12,7 +12,7 @@ import {Option} from "../models/tests/option.model";
   selector: 'creator',
   templateUrl: './creator.component.html',
   styleUrls: [],
-  providers: [TestService, TokenService, HttpClient]
+  providers: [TestService, HttpClient]
 })
 export class CreatorComponent implements OnInit {
   questions: Array<Question> = new Array<Question>();

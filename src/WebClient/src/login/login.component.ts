@@ -40,9 +40,10 @@ export class LoginComponent {
         if (response.status == 400) this.errorMessage = response.error.message;
         if (!environment.production) console.log(response);
       },
-      next: (next: { token: string, role: Role }) => {
+      next: (next: { token: string, role: Role, username: string }) => {
         this._token.jwtToken = next.token;
         this._token.role = next.role;
+        this._token.username = next.username;
         if (!environment.production) console.log(next);
       },
       complete: () => {

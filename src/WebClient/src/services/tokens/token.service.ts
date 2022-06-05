@@ -7,6 +7,7 @@ import {Role} from "../../models/users/role.enum";
 })
 export class TokenService {
   public role?: Role;
+  public username?: string;
 
   constructor(
     private _cookie: CookieService
