@@ -25,5 +25,4 @@ services:
       - ~/.aspnet/https:/https:ro
     ports:
       - "5222:80"
-      - "7222:443"
     restart: on-failure
