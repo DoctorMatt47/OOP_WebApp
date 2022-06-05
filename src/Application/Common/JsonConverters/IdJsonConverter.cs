@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace OOP_WebApp.Lab2.WebAPI.JsonConverters;
+namespace OOP_WebApp.Application.Common.JsonConverters;
 
 public class IdJsonConverter<TValue, TId> : JsonConverter<TId> where TId : Id<TValue, TId>, new()
 {

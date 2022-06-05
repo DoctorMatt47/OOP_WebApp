@@ -2,13 +2,12 @@
 using OOP_WebApp.Domain.Entities;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace OOP_WebApp.Lab1.WebAPI.JsonConverters;
+namespace OOP_WebApp.Application.Common.JsonConverters;
 
 public static class CustomJsonOptions
 {
-    public static JsonSerializerOptions Get()
+    public static JsonSerializerOptions Update(JsonSerializerOptions options)
     {
-        var options = new JsonSerializerOptions();
         var converters = options.Converters;
         converters.Add(new ValueObjectJsonConverter<string, OptionString>());
         converters.Add(new ValueObjectJsonConverter<string, QuestionString>());
@@ -17,6 +16,7 @@ public static class CustomJsonOptions
         converters.Add(new IdJsonConverter<Guid, OptionId>());
         converters.Add(new IdJsonConverter<Guid, QuestionId>());
         converters.Add(new IdJsonConverter<Guid, TestId>());
+        converters.Add(new IdJsonConverter<Guid, AnswerId>());
         converters.Add(new IdJsonConverter<string, Username>());
         options.PropertyNameCaseInsensitive = true;
         options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;

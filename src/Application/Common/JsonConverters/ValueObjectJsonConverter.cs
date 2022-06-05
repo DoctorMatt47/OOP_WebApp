@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using OOP_WebApp.Domain.ValueObjects;
 
-namespace OOP_WebApp.Lab2.WebAPI.JsonConverters;
+namespace OOP_WebApp.Application.Common.JsonConverters;
 
 public class ValueObjectJsonConverter<TValue, TThis> : JsonConverter<TThis>
     where TThis : ValueObject<TValue, TThis>, new()
