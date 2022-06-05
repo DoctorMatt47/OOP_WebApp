@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg">
+      <div class="main-bar">
+        <div class="search-block justify-content-center">
+
+          <h2>Tests:</h2>
+          <div id="RESULTS">
+            <div *ngIf="tests.length == 0">
+              Not found
+            </div>
+            <div *ngFor="let test of tests; index as i">
+              <div class="result-test">
+                <div class="row">
+                  <a href="/test/{{test.id}}">
+                    <div class="col test-title">{{test.title}}</div>
+                  </a>
+                  <div class="col author">{{test.username}}</div>
+                </div>
+                <p>{{test.description}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>

@@ -4,12 +4,14 @@ import {Observer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TokenService} from "../services/tokens/token.service";
 import {UsersService} from "../services/api/users.service";
+import {environment} from "../environments/environment";
+import {Role} from "../models/users/role.enum";
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: [],
-  providers: [UsersService, HttpClient, TokenService]
+  providers: [UsersService, HttpClient]
 })
 export class LoginComponent {
   username: string = '';
@@ -35,12 +37,13 @@ export class LoginComponent {
     }
     let observer: Observer<any> = {
       error: (response: HttpErrorResponse) => {
-        this.loginErrorHandle(response);
-        console.log(response);
+        if (response.status == 400) this.errorMessage = response.error.message;
+        if (!environment.production) console.log(response);
       },
-      next: (next: any) => {
-        this.jwtTokenSave(next.token);
-        console.log(next);
+      next: (next: { token: string, role: Role }) => {
+        this._token.jwtToken = next.token;
+        this._token.role = next.role;
+        if (!environment.production) console.log(next);
       },
       complete: () => {
         this.errorMessage = "";
@@ -50,17 +53,6 @@ export class LoginComponent {
     this._users.authenticate(this.username, this.password)
       .subscribe(observer);
   }
-
-  private loginErrorHandle(response: HttpErrorResponse): void {
-    if (response.status == 400) {
-      this.errorMessage = response.error.message;
-    }
-  }
-
-  private jwtTokenSave(jwtToken: string): void {
-    this._token.jwtToken = jwtToken;
-  }
-
   private navigateToPreviousPage(): void {
     const redirect = window.history.state.redirect ?? 'tests';
     this._router.navigate([redirect]);

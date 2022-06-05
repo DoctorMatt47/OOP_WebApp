@@ -1,18 +1,17 @@
-import {Component} from '@angular/core';
-import {Test} from "../models/tests/test.model";
-import {TestService} from "../services/api/test.service";
-import {Observer} from "rxjs";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Component} from "@angular/core";
 import {TokenService} from "../services/tokens/token.service";
+import {TestService} from "../services/api/test.service";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Test} from "../models/tests/test.model";
 import {Router} from "@angular/router";
+import {Observer} from "rxjs";
 
 @Component({
-  selector: 'tests',
-  templateUrl: './tests.component.html',
-  styleUrls: [],
+  selector: 'profile',
+  templateUrl: './profile.component.html',
   providers: [TokenService, TestService, HttpClient]
 })
-export class TestsComponent {
+export class ProfileComponent {
   tests: Array<Test> = new Array<Test>();
 
   constructor(private _tests: TestService,
@@ -30,7 +29,7 @@ export class TestsComponent {
         console.log(response);
       },
       next: (next: Array<Test>) => {
-        this.tests = next;
+        this.tests = next.filter(t => t.username);
         console.log(this.tests);
       },
       complete: () => {

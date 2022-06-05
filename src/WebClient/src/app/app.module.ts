@@ -10,19 +10,23 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {TestsComponent} from "../tests/tests.component";
 import {CreatorComponent} from "../creator/creator.component";
+import {ProfileComponent} from "../profile/profile.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: "tests", pathMatch: "full"},
   {path: 'test/:id', component: TestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'tests', component: TestsComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: 'creator', component: CreatorComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, NotFoundComponent, LoginComponent, TestComponent, TestsComponent, CreatorComponent
+    AppComponent, NotFoundComponent, LoginComponent,
+    TestComponent, TestsComponent, CreatorComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule

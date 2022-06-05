@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenService} from "../services/tokens/token.service";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Test} from "../models/tests/test.model";
 import {Observer} from "rxjs";
@@ -10,7 +9,7 @@ import {TestService} from "../services/api/test.service";
   selector: 'test',
   templateUrl: './test.component.html',
   styleUrls: [],
-  providers: [TokenService, TestService, HttpClient]
+  providers: [TestService, HttpClient]
 })
 export class TestComponent implements OnInit {
   test: Test = new Test();

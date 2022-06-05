@@ -4,26 +4,29 @@
       <div class="row w-100">
         <div class="col-lg ml-2">
           <div class="row">
-            <div class="col-lg pl-3 pr-0">
+            <div *ngIf="isLogin" class="col-lg pl-3 pr-0">
               <div class="nav-button">
                 <a routerLink="/creator" style="white-space: nowrap;">
                   Create test
                 </a>
               </div>
             </div>
-            <div class="col-lg pl-3 pr-0">
+            <div *ngIf="isLogin" class="col-lg pl-3 pr-0">
               <div class="nav-button">
-                <a routerLink="/tests">
+                <a *ngIf="isTutor" routerLink="/profile">
+                  Profile
+                </a>
+                <a *ngIf="isStudent" routerLink="/tests">
                   Tests
                 </a>
               </div>
             </div>
             <div class="col-lg pl-3 pr-0">
               <div class="nav-button">
-                <a *ngIf="isLoggedIn" routerLink="/logout">
+                <a (click)="logout()" *ngIf="_token.isJwtTokenExists()" routerLink="/login">
                   Logout
                 </a>
-                <a *ngIf="!isLoggedIn" routerLink="/login">
+                <a *ngIf="!_token.isJwtTokenExists()" routerLink="/login">
                   Login
                 </a>
               </div>
