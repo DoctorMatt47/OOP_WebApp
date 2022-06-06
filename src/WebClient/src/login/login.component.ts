@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TokenService} from "../services/tokens/token.service";
-import {UsersService} from "../services/api/users.service";
+import {UserService} from "../services/api/user.service";
 import {environment} from "../environments/environment";
 import {Role} from "../models/users/role.enum";
 
@@ -11,19 +11,23 @@ import {Role} from "../models/users/role.enum";
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: [],
-  providers: [UsersService, HttpClient]
+  providers: [UserService, HttpClient]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   errorMessage: string = ''
 
   constructor(
-    private _users: UsersService,
+    private _users: UserService,
     private _token: TokenService,
     private _route: ActivatedRoute,
     private _router: Router
   ) {
+  }
+
+  ngOnInit() {
+    this._token.deleteJwtToken();
   }
 
   login(): void {

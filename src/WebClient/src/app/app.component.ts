@@ -24,8 +24,4 @@ export class AppComponent {
   get isLogin(): boolean {
     return this._token.isJwtTokenExists();
   }
-
-  logout() {
-    this._token.deleteJwtToken();
-  }
 }

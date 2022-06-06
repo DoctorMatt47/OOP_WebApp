@@ -11,8 +11,8 @@ public class UsersController : ApiControllerBase
     public UsersController(IUserService users) => _users = users;
 
     [HttpGet]
-    public Task<IEnumerable<GetUserResponse>> Get([FromQuery] TestId testId, CancellationToken cancellationToken) =>
-        _users.Get(testId, cancellationToken);
+    public Task<IEnumerable<GetUserResponse>> Get([FromQuery] Guid testId, CancellationToken cancellationToken) =>
+        _users.Get(TestId.From(testId), cancellationToken);
 
     [HttpPost("Authenticate")]
     public Task<AuthenticateResponse> Authenticate(AuthenticateRequest request, CancellationToken cancellationToken) =>

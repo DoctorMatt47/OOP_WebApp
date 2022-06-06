@@ -26,6 +26,9 @@ public class AnswerRepository : RepositoryBase, IAnswerRepository
         return answers;
     }
 
+    public async Task Create(IEnumerable<Answer> answers, CancellationToken cancellationToken) =>
+        throw new NotImplementedException();
+
     private static Answer GetAnswerFromReader(IDataRecord reader)
     {
         var answerId = reader.GetGuid(0);

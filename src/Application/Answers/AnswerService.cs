@@ -18,4 +18,21 @@ public class AnswerService : IAnswerService
         var answers = await uow.Answers.Get(id, username, cancellationToken);
         return answers.Select(a => new GetAnswerResponse(a.Id, a.TestId, a.QuestionId, a.OptionId, a.Username));
     }
+
+    public async Task Create(
+        IEnumerable<CreateAnswerRequest> request,
+        CancellationToken cancellationToken)
+    {
+        await using var uow = _uowFactory.Create();
+        var answers = request.Select(a => new Answer(
+            AnswerId.From(Guid.NewGuid()),
+            a.Username,
+            a.TestId,
+            a.QuestionId,
+            a.OptionId
+        ));
+
+        await uow.Answers.Create(answers, cancellationToken);
+        await uow.SaveChangesAsync();
+    }
 }

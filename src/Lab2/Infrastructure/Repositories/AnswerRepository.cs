@@ -15,4 +15,7 @@ public class AnswerRepository : RepositoryBase, IAnswerRepository
         await Context.Answers
             .Where(a => a.TestId == id && a.Username == username)
             .ToListAsync(cancellationToken);
+
+    public async Task Create(IEnumerable<Answer> answers, CancellationToken cancellationToken) => 
+        Context.AddRange(answers);
 }

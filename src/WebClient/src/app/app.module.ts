@@ -11,6 +11,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {TestsComponent} from "../tests/tests.component";
 import {CreatorComponent} from "../creator/creator.component";
 import {ProfileComponent} from "../profile/profile.component";
+import {TestAnswersComponent} from "../test-answers/test-answers.component";
+import {TestAnswerComponent} from "../test-answer/test-answer.component";
+import {TokenService} from "../services/tokens/token.service";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: "tests", pathMatch: "full"},
@@ -18,6 +21,8 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'tests', component: TestsComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'test-answers/:id', component: TestAnswersComponent},
+  {path: 'test-answer/:testId/:username', component: TestAnswerComponent},
   {path: 'creator', component: CreatorComponent},
   {path: '**', component: NotFoundComponent},
 ];
@@ -26,12 +31,12 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent, NotFoundComponent, LoginComponent,
     TestComponent, TestsComponent, CreatorComponent,
-    ProfileComponent
+    ProfileComponent, TestAnswersComponent, TestAnswerComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule
   ],
-  providers: [],
+  providers: [TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {TokenService} from "../services/tokens/token.service";
 import {TestService} from "../services/api/test.service";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
@@ -10,9 +10,9 @@ import {Role} from "../models/users/role.enum";
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
-  providers: [TokenService, TestService, HttpClient]
+  providers: [TestService, HttpClient]
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   tests: Array<Test> = new Array<Test>();
 
   constructor(private _tests: TestService,

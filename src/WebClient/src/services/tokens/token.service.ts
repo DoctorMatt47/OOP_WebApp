@@ -6,12 +6,27 @@ import {Role} from "../../models/users/role.enum";
   providedIn: 'root',
 })
 export class TokenService {
-  public role?: Role;
-  public username?: string;
-
   constructor(
     private _cookie: CookieService
   ) {
+  }
+
+  get username() : string {
+    return this._cookie.get("OOP_WebApp_username");
+  }
+
+  set username(value: string) {
+    this._cookie.delete("OOP_WebApp_username");
+    this._cookie.set("OOP_WebApp_username", value, undefined, "/");
+  }
+
+  get role() : Role {
+    return Number.parseInt(this._cookie.get("OOP_WebApp_role"));
+  }
+
+  set role(value: Role) {
+    this._cookie.delete("OOP_WebApp_role");
+    this._cookie.set("OOP_WebApp_role", value.toString(), undefined, "/");
   }
 
   get jwtToken(): string {
@@ -19,7 +34,8 @@ export class TokenService {
   }
 
   set jwtToken(value: string) {
-    this._cookie.set("OOP_WebApp_jwtToken", value);
+    this._cookie.delete("OOP_WebApp_jwtToken", value);
+    this._cookie.set("OOP_WebApp_jwtToken", value, undefined, "/");
   }
 
   isJwtTokenExists() {
@@ -28,5 +44,7 @@ export class TokenService {
 
   deleteJwtToken() {
     this._cookie.delete("OOP_WebApp_jwtToken");
+    this._cookie.delete("OOP_WebApp_role");
+    this._cookie.delete("OOP_WebApp_username");
   }
 }

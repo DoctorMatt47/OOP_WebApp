@@ -18,4 +18,11 @@ public class AnswersController : ApiControllerBase
         [FromQuery] string username,
         CancellationToken cancellationToken) =>
         _answers.Get(TestId.From(testId), Username.From(username), cancellationToken);
+    
+    [HttpPost]
+    [Authorize(Roles = "Student")]
+    public Task Create(
+        IEnumerable<CreateAnswerRequest> answers,
+        CancellationToken cancellationToken) =>
+        _answers.Create(answers, cancellationToken);
 }

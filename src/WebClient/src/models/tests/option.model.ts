@@ -1,3 +1,4 @@
 ﻿export class Option {
-    public string?: string;
+  public id?: string
+  public string?: string;
 }

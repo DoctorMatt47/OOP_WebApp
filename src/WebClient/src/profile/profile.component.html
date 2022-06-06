@@ -5,7 +5,7 @@
       <div class="main-bar">
         <div class="search-block justify-content-center">
 
-          <h2>Tests:</h2>
+          <h2>Your tests:</h2>
           <div id="RESULTS">
             <div *ngIf="tests.length == 0">
               Not found
@@ -13,10 +13,11 @@
             <div *ngFor="let test of tests; index as i">
               <div class="result-test">
                 <div class="row">
-                  <a href="/test/{{test.id}}">
+                  <a href="/test-answers/{{test.id}}">
                     <div class="col test-title">{{test.title}}</div>
                   </a>
-                  <div class="col author">{{test.username}}</div>
+                  <div>
+                  </div>
                 </div>
                 <p>{{test.description}}</p>
               </div>
