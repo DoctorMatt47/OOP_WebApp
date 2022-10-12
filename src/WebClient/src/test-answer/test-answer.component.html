@@ -32,7 +32,7 @@
                 <input type="checkbox" class="form-check-input mt-2"
                        [name]="'question-'+i+'-option'"
                        [id]="option.id"
-                       readonly [checked]="answer(i, j)">
+                       [checked]="answer(i, j)" onclick="return false;">
                 {{option.string}}
               </label><br>
             </div>

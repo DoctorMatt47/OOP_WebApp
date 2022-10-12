@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   database:
-    container_name: database
+    container_name: postgres-database
     image: postgres
     restart: always
     hostname: postgres
@@ -25,4 +25,13 @@ services:
       - ~/.aspnet/https:/https:ro
     ports:
       - "5222:80"
+    restart: on-failure
+
+  webclient-lab2:
+    container_name: webclient
+    build:
+      context: .
+      dockerfile: src/WebClient/Dockerfile
+    ports:
+      - "8080:80"
     restart: on-failure

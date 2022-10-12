@@ -55,7 +55,7 @@ export class TestAnswerComponent implements OnInit {
         for (let j = 0; j < question.options.length; j++) {
           const option = question.options[j];
           const answer = answers.find(a => a.optionId == option.id);
-          thisAnswers[i].push(answer == undefined);
+          thisAnswers[i].push(answer != undefined);
         }
       }
     }
