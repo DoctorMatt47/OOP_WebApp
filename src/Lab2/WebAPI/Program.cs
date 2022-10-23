@@ -27,7 +27,7 @@ app.UseSwaggerUI();
 
 app.UseExceptionHandler("/error");
 
-app.UseCors(opts => opts.WithOrigins("http://localhost:4200").AllowAnyMethod());
+app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.UseAuthentication();
 app.UseAuthorization();
